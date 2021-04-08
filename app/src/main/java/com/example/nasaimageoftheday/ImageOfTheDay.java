@@ -26,6 +26,7 @@ import java.net.URL;
 
 public class ImageOfTheDay extends AppCompatActivity {
 
+    private static final String TAG ="" ;
     private static String nasaApi = "https://api.nasa.gov/planetary/apod?api_key=VATcMfMCvQtVHKgzXnC8pmkDHooE7qpd89Beqw0m";
 
     @Override
@@ -103,7 +104,7 @@ public class ImageOfTheDay extends AppCompatActivity {
 
 
             } catch (Exception e) {
-
+                Log.e(TAG, "doInBackground: ", e);
             }
             return date + explanation + title + hdurl;
         }
