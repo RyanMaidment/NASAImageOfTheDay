@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -19,7 +22,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class MainActivity2 extends AppCompatActivity {
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.concurrent.atomic.AtomicReference;
+
+public class MainActivity2 extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -29,6 +36,8 @@ public class MainActivity2 extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        AtomicReference<TextView> textView = new AtomicReference<>(findViewById(R.id.textView_date));
+        textView.get().setText(PrefConfig.loadDateInPref(this));
         findViewById(R.id.button_today)
                 .setOnClickListener(v -> startActivity(new Intent(MainActivity2.this, ImageOfTheDay.class)));
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -45,6 +54,11 @@ public class MainActivity2 extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        AtomicReference<Button> button = new AtomicReference<>(findViewById(R.id.button4));
+        button.get().setOnClickListener(v -> {
+            DialogFragment datePicker = new DatePickerFragment();
+            datePicker.show(getSupportFragmentManager(), "date picker");
+            });
     }
 
     @Override
@@ -60,4 +74,33 @@ public class MainActivity2 extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+        AtomicReference<TextView> textView = new AtomicReference<>(findViewById(R.id.textView_date));
+        textView.get().setText(currentDateString);
+        PrefConfig.saveDateInPref(getApplicationContext(), currentDateString);
+    }
+
+
+// TODO LIST
+// TODO 1.    The project must have a ListView somewhere to present items. Selecting an item from the ListView must show detailed information about the item selected.
+// TODO 2.    The project must have at least 1 progress bar and at least 1 button^.
+// TODO 3.    The project must have at least 1 edit text with appropriate text input method and at least 1 Toast and 1 Snackbar.
+// TODO 4.    The software must have at least 4 or more activities. Your activity must be accessible by selecting a graphical icon from a --Toolbar!, and --NavigationDrawer!.
+//               The top navigation layout should have the Activity’s title, and a version number.
+// TODO 5.    The project must use a fragment! somewhere in its graphical interface.
+// TODO 6.    Each activity must have a help menu item that displays an AlertDialog with instructions for how to use the interface.
+// TODO 7.    There must be at least 1 other language supported by your Activity. Please use Canadian French as the secondary language if you do not you know a language other than English.
+// TODO 8.    The items listed in the ListView must be stored by the application so that they appear the next time the application is launched. The user must be able to add and delete items, which would then also be stored in a database.
+// TODO 9.    When retrieving data from an --http server!, the activity must use an --AsyncTask!.
+// TODO 10.   The project must use --SharedPreferences! to save something about the application for use the next time the application is launched.
+// TODO 11.   All activities must be integrated into a single working application, on a single emulator, and must be uploaded to GitHub.
+// TODO 12.   The interfaces must look professional, with GUI elements properly laid out and aligned.
+// TODO 13.   The functions and variables you write must be properly documented using JavaDoc comments.
 }

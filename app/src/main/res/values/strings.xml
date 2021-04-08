@@ -35,4 +35,5 @@
     <string name="textview3">TextView</string>
     <string name="image_of_the_day">image of the day</string>
     <string name="another_picture">another picture</string>
+    <string name="date_selected">date_selected</string>
 </resources>
