@@ -1,9 +1,9 @@
 package com.example.nasaimageoftheday;
 
-import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,21 +25,26 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.concurrent.atomic.AtomicReference;
 
 
-public class ImageOfTheDay extends AppCompatActivity {
+public class ImageOfTheDay2 extends AppCompatActivity {
 
     private static final String TAG ="" ;
     private static String nasaApi = "https://api.nasa.gov/planetary/apod?api_key=VATcMfMCvQtVHKgzXnC8pmkDHooE7qpd89Beqw0m";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imageoftheday);
         //Toolbar toolbar = findViewById(R.id.toolbar);
-      //  setSupportActionBar(toolbar);
-       MyHTTPRequest req = new MyHTTPRequest();
-               req.execute(nasaApi);  //Type 1
+        //  setSupportActionBar(toolbar);
+        Intent i = getIntent();
+        String appendURL = i.getStringExtra("Date");
+        String uri = "https://api.nasa.gov/planetary/apod?api_key=VATcMfMCvQtVHKgzXnC8pmkDHooE7qpd89Beqw0m&date=" + appendURL;
+        MyHTTPRequest req = new MyHTTPRequest();
+        req.execute(uri); //Type 1
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -60,21 +66,21 @@ public class ImageOfTheDay extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    private class MyHTTPRequest extends AsyncTask<String, Integer, String> {
 
+    private class MyHTTPRequest extends AsyncTask<String, Integer, String> {
         protected String date;
         protected String explanation;
         protected String title;
         protected String hdurl;
-       TextView viewTitle = (TextView) findViewById(R.id.viewTitle);
-       TextView viewDate = (TextView) findViewById(R.id.viewDate);
-       TextView viewDesc = (TextView) findViewById(R.id.viewDesc);
+        TextView viewTitle = (TextView) findViewById(R.id.viewTitle);
+        TextView viewDate = (TextView) findViewById(R.id.viewDate);
+        TextView viewDesc = (TextView) findViewById(R.id.viewDesc);
         //Type3                Type1
         public String doInBackground(String... args) {
             try {
 
                 //create a URL object of what server to contact:
-                URL url = new URL(nasaApi);
+                URL url = new URL(args[0]);
 
                 //open the connection
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -111,19 +117,20 @@ public class ImageOfTheDay extends AppCompatActivity {
         }
 
         //Type3
-       public void onPostExecute(String fromDoInBackground) {
+        public void onPostExecute(String fromDoInBackground) {
             Log.i("HTTP", fromDoInBackground);
             viewTitle.setText(title);
             viewDate.setText(date);
             viewDesc.setText(explanation);
-           new DownloadImageTask((ImageView) findViewById(R.id.imageView2))
-                   .execute(hdurl);
+            new DownloadImageTask((ImageView) findViewById(R.id.imageView2))
+                    .execute(hdurl);
         }
 
     }
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
+
         public DownloadImageTask(ImageView bmImage) {
             this.bmImage = bmImage;
         }
@@ -139,15 +146,10 @@ public class ImageOfTheDay extends AppCompatActivity {
                 e.printStackTrace();
             }
             return mIcon11;
-
         }
 
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
-            DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
-            databaseHelper.getImage(result);
-
         }
-
     }
 }

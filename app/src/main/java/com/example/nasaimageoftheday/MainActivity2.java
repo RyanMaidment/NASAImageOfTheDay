@@ -82,9 +82,27 @@ public class MainActivity2 extends AppCompatActivity implements DatePickerDialog
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
         String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+
         AtomicReference<TextView> textView = new AtomicReference<>(findViewById(R.id.textView_date));
         textView.get().setText(currentDateString);
         PrefConfig.saveDateInPref(getApplicationContext(), currentDateString);
+
+        int monthOfYear1 = month + 1;
+        String formattedMonth = "" + monthOfYear1;
+        String formattedDayOfMonth = "" + dayOfMonth;
+
+        if(monthOfYear1 < 10){
+
+            formattedMonth = "0" + monthOfYear1;
+        }
+        if(dayOfMonth < 10){
+
+            formattedDayOfMonth = "0" + dayOfMonth;
+        }
+
+        Intent intent = new Intent(MainActivity2.this, ImageOfTheDay2.class);
+        intent.putExtra("Date", year+"-"+formattedMonth+"-"+formattedDayOfMonth);
+        startActivity(intent);
     }
 
 
