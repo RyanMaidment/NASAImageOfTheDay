@@ -1,46 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@drawable/nebula">
+    android:background="@drawable/nebula"
+    tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="140dp"
-        android:layout_height="58dp"
-        android:text="Today"
-        tools:layout_editor_absoluteX="38dp"
-        tools:layout_editor_absoluteY="565dp" />
+        android:id="@+id/button_today"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="108dp"
+        android:text="@string/today"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="140dp"
-        android:layout_height="58dp"
-        android:text="Pick Date"
-        tools:layout_editor_absoluteX="228dp"
-        tools:layout_editor_absoluteY="565dp" />
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="43dp"
+        android:layout_marginBottom="108dp"
+        android:text="@string/pick_date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_today"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="385dp"
-        android:layout_height="257dp"
-        android:text="Nasa's Image Of The Day"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="71dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="237dp"
+        android:text="@string/nasa_s_image_of_the_day"
         android:textAlignment="center"
-        android:textSize="50dp"
         android:textColor="@color/white"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="71dp" />
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="261dp"
-        android:layout_height="306dp"
-        app:srcCompat="@drawable/nasa_logo"
-        tools:layout_editor_absoluteX="75dp"
-        tools:layout_editor_absoluteY="203dp" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="203dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginBottom="56dp"
+        android:contentDescription="@string/nasa_symbol"
+        app:layout_constraintBottom_toTopOf="@+id/button_today"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/nasa_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
