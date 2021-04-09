@@ -1,12 +1,16 @@
 package com.example.nasaimageoftheday;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -29,6 +33,11 @@ import java.util.concurrent.atomic.AtomicReference;
 public class MainActivity2 extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private AppBarConfiguration mAppBarConfiguration;
+    private Context mContext;
+    private Activity mActivity;
+    private RelativeLayout mRelativeLayout;
+    private Button mButtonTask;
+    private Snackbar mSnackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +45,39 @@ public class MainActivity2 extends AppCompatActivity implements DatePickerDialog
         setContentView(R.layout.activity_main2);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         AtomicReference<TextView> textView = new AtomicReference<>(findViewById(R.id.textView_date));
         textView.get().setText(PrefConfig.loadDateInPref(this));
         findViewById(R.id.button_today)
                 .setOnClickListener(v -> startActivity(new Intent(MainActivity2.this, ImageOfTheDay.class)));
+// Get the application context
+        mContext = getApplicationContext();
+        mActivity = MainActivity2.this;
+
+        // Get the widget reference from XML layout
+        mRelativeLayout = findViewById(R.id.rl);
+ //       mButtonTask = (Button) findViewById(R.id.btn_task);
+
+        // Initialize an empty text Snackbar
+        mSnackbar = Snackbar.make(mRelativeLayout,"",Snackbar.LENGTH_INDEFINITE);
+
+        // Get the Snackbar view
+        View view = mSnackbar.getView();
+
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
+        fab.setOnClickListener(view1 -> {
+            // Change the Snackbar text
+            mSnackbar.setText("Emailing NASA Eh!");
+
+            // Set an action for Snackbar
+            // Set a click listener for Snackbar action button
+            mSnackbar.setAction("DO IT", v -> {
+                Intent intent = new Intent(MainActivity2.this, EmailNASA.class);
+                    startActivity(intent);
+                });
+            // Display the Snackbar
+            mSnackbar.show();
+        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -59,8 +94,20 @@ public class MainActivity2 extends AppCompatActivity implements DatePickerDialog
             DialogFragment datePicker = new DatePickerFragment();
             datePicker.show(getSupportFragmentManager(), "date picker");
             });
-    }
 
+
+
+    }
+    public void showSnackbar(View view, String message, int duration)
+    {
+        // Create snackbar
+        final Snackbar snackbar = Snackbar.make(view, message, duration);
+
+        // Set an action on it, and a handler
+        snackbar.setAction("DISMISS", v -> snackbar.dismiss());
+
+        snackbar.show();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -86,6 +133,7 @@ public class MainActivity2 extends AppCompatActivity implements DatePickerDialog
         textView.get().setText(currentDateString);
         PrefConfig.saveDateInPref(getApplicationContext(), currentDateString);
     }
+
 
 
 // TODO LIST
