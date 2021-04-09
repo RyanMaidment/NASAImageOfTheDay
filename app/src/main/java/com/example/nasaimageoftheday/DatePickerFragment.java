@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class DatePickerFragment extends DialogFragment {
@@ -22,6 +23,7 @@ public class DatePickerFragment extends DialogFragment {
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
         //get the date from picker
+
         DatePickerDialog selecteddate = new DatePickerDialog(getActivity(),(DatePickerDialog.OnDateSetListener)getActivity(), year, month, day);
         // nothing in the future - not available - this limits choices to today or past
         DatePicker maxdate = selecteddate.getDatePicker();

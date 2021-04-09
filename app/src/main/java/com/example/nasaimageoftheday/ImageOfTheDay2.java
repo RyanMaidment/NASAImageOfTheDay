@@ -35,22 +35,24 @@ import java.util.Calendar;
 import java.util.concurrent.atomic.AtomicReference;
 
 
-public class ImageOfTheDay extends AppCompatActivity {
+public class ImageOfTheDay2 extends AppCompatActivity {
     protected String date;
     protected String explanation;
     protected String title;
     protected String hdurl;
     protected Bitmap nasaImage;
     private static final String TAG ="" ;
-    private static String nasaApi = "https://api.nasa.gov/planetary/apod?api_key=VATcMfMCvQtVHKgzXnC8pmkDHooE7qpd89Beqw0m";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imageoftheday);
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //  setSupportActionBar(toolbar);
+        Intent i = getIntent();
+        String appendURL = i.getStringExtra("Date");
+        String uri = "https://api.nasa.gov/planetary/apod?api_key=VATcMfMCvQtVHKgzXnC8pmkDHooE7qpd89Beqw0m&date=" + appendURL;
         MyHTTPRequest req = new MyHTTPRequest();
-        req.execute(nasaApi); //Type 1
+        req.execute(uri); //Type 1
         Button button1 = findViewById(R.id.button);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +83,7 @@ public class ImageOfTheDay extends AppCompatActivity {
     }
 
     public void getImage(Bitmap result, String title, String date, String explanation) {
-        DatabaseHelper databaseHelper = new DatabaseHelper(ImageOfTheDay.this);
+        DatabaseHelper databaseHelper = new DatabaseHelper(ImageOfTheDay2.this);
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         result.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);

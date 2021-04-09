@@ -43,9 +43,10 @@
         android:text="@string/nasa_s_image_of_the_day"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="50sp"
+        android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,14 +61,15 @@
         android:contentDescription="@string/nasa_symbol"
         app:layout_constraintBottom_toTopOf="@+id/button_today"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/nasa_logo" />
 
     <TextView
         android:id="@+id/textView_date"
-        android:layout_width="148dp"
-        android:layout_height="25dp"
+        android:layout_width="160dp"
+        android:layout_height="26dp"
         android:layout_below="@id/button4"
         android:layout_centerHorizontal="true"
         android:layout_gravity="bottom|end"
@@ -75,7 +77,7 @@
         android:background="@color/purple_500"
         android:text="@string/date_selected"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.873"
