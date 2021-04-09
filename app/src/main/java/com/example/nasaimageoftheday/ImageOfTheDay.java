@@ -1,11 +1,9 @@
 package com.example.nasaimageoftheday;
 
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -13,12 +11,12 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,16 +28,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.concurrent.atomic.AtomicReference;
 
 
 public class ImageOfTheDay extends AppCompatActivity {
     protected String date;
     protected String explanation;
     protected String title;
-    protected String hdurl;
+    protected String url;
     protected Bitmap nasaImage;
     private static final String TAG ="" ;
     private static String nasaApi = "https://api.nasa.gov/planetary/apod?api_key=VATcMfMCvQtVHKgzXnC8pmkDHooE7qpd89Beqw0m";
@@ -130,13 +125,13 @@ public class ImageOfTheDay extends AppCompatActivity {
                 date = nasaJson.getString("date");
                 explanation = nasaJson.getString("explanation");
                 title = nasaJson.getString("title");
-                hdurl = nasaJson.getString("hdurl");
+                ImageOfTheDay.this.url = nasaJson.getString("url");
 
 
             } catch (Exception e) {
                 Log.e(TAG, "doInBackground: ", e);
             }
-            return date + explanation + title + hdurl;
+            return date + explanation + title + url;
         }
 
         //Type3
@@ -145,8 +140,9 @@ public class ImageOfTheDay extends AppCompatActivity {
             viewTitle.setText(title);
             viewDate.setText(date);
             viewDesc.setText(explanation);
+            viewDesc.setMovementMethod(new ScrollingMovementMethod());
             new DownloadImageTask((ImageView) findViewById(R.id.imageView2))
-                    .execute(hdurl);
+                    .execute(url);
         }
 
     }

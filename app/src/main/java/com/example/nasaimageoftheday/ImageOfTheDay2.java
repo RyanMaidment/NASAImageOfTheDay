@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -13,13 +12,14 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONObject;
@@ -30,16 +30,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.concurrent.atomic.AtomicReference;
 
 
 public class ImageOfTheDay2 extends AppCompatActivity {
     protected String date;
     protected String explanation;
     protected String title;
-    protected String hdurl;
+    protected String url;
     protected Bitmap nasaImage;
     private static final String TAG ="" ;
     @Override
@@ -125,20 +122,27 @@ public class ImageOfTheDay2 extends AppCompatActivity {
                 }
                 String result = sb.toString(); //result is the whole string
 
-
                 // convert string to JSON:
                 JSONObject nasaJson = new JSONObject(result);
                 //get the double associated with "value"
                 date = nasaJson.getString("date");
+                publishProgress(25);
                 explanation = nasaJson.getString("explanation");
+                publishProgress(50);
                 title = nasaJson.getString("title");
-                hdurl = nasaJson.getString("hdurl");
-
+                publishProgress(75);
+                ImageOfTheDay2.this.url = nasaJson.getString("url");
+                publishProgress(100);
 
             } catch (Exception e) {
                 Log.e(TAG, "doInBackground: ", e);
             }
-            return date + explanation + title + hdurl;
+            return date + explanation + title + url;
+        }
+
+        protected void onProgressUpdate(Integer... progress) {
+            ProgressBar progressBar = findViewById(R.id.progressBar2);
+            progressBar.setProgress(progress[0]);
         }
 
         //Type3
@@ -147,8 +151,10 @@ public class ImageOfTheDay2 extends AppCompatActivity {
             viewTitle.setText(title);
             viewDate.setText(date);
             viewDesc.setText(explanation);
+            viewDesc.setMovementMethod(new ScrollingMovementMethod());
+
             new DownloadImageTask((ImageView) findViewById(R.id.imageView2))
-                    .execute(hdurl);
+                    .execute(url);
         }
 
     }
@@ -170,7 +176,6 @@ public class ImageOfTheDay2 extends AppCompatActivity {
                 e.printStackTrace();
             }
             return mIcon11;
-
         }
 
         protected void onPostExecute(Bitmap result) {
