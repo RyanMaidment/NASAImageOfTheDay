@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NASAImageOfTheDay</string>
+    <string name="next">Suivant</string>
+    <string name="previous">Précédent</string>
+    <string name="title_activity_main2">NASA Image du Jour</string>
+    <string name="menu_gallery">Galerie</string>
+    <string name="nasa_s_image_of_the_day">NASA Image du Jour</string>
+    <string name="pick_date">Choisissez la date</string>
+    <string name="today">" Aujourd'hui"</string>
+    <string name="emailto">À:</string>
+    <string name="email_subject">Matière:</string>
+    <string name="email_message">"Message: "</string>
+    <string name="send_button">"Envoyer: "</string>
+    <string name="app_name_EmailNASA">Email NASA</string>
+    <string name="action_settings">Galerie</string>
+</resources>

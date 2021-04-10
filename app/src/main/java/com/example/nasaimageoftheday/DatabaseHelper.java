@@ -2,6 +2,7 @@ package com.example.nasaimageoftheday;
 
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -66,5 +67,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // create new table
         onCreate(db);
     }
+
+    public Cursor viewPhoto() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "Select * from " + DB_TABLE;
+        Cursor cursor = db.rawQuery(query, null);
+
+        return cursor;
+    }
+
 
 }

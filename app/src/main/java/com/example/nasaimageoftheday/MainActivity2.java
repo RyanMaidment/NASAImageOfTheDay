@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.Button;
@@ -36,7 +37,6 @@ public class MainActivity2 extends AppCompatActivity implements DatePickerDialog
     private Context mContext;
     private Activity mActivity;
     private RelativeLayout mRelativeLayout;
-    private Button mButtonTask;
     private Snackbar mSnackbar;
 
     /**
@@ -67,7 +67,6 @@ public class MainActivity2 extends AppCompatActivity implements DatePickerDialog
 
         // Initialize an empty text Snackbar
         mSnackbar = Snackbar.make(mRelativeLayout,"",Snackbar.LENGTH_INDEFINITE);
-
         // Get the Snackbar view
         View view = mSnackbar.getView();
 
@@ -134,6 +133,10 @@ public class MainActivity2 extends AppCompatActivity implements DatePickerDialog
         return true;
     }
 
+    public void onClick(MenuItem item) {
+        Intent i = new Intent(this, PhotoView.class);
+        startActivity(i);
+    }
     /**
      * onSupportNavigateUp is called whenever
      * the user chooses to navigate within the application's

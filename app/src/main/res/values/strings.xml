@@ -1,46 +1,51 @@
 <resources>
     <string name="app_name">NASAImageOfTheDay</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Gallery</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="title_activity_imageoftheday">activity_imageoftheday</string>
+    <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
+    <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_imageoftheday" translatable="false">activity_imageoftheday</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="title_activity_main2">NASA Image of the Day</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_header_title" translatable="false">Android Studio</string>
+    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
+
+    <string name="menu_home" translatable="false">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow" translatable="false">Slideshow</string>
+    <string name="nasa_symbol" translatable="false">NASA symbol</string>
+    <string name="nasa_s_image_of_the_day">Nasa\'s Image Of The Day</string>
+    <string name="pick_date">Pick Date</string>
+    <string name="today">Today</string>
+    <string name="floating_action_button" translatable="false">float action button</string>
+    <string name="textview" translatable="false">TextView</string>
+    <string name="textview2" translatable="false">TextView</string>
+    <string name="textview3" translatable="false">TextView</string>
+    <string name="image_of_the_day" translatable="false">image of the day</string>
+    <string name="another_picture" translatable="false">another picture</string>
+    <string name="date_selected" translatable="false">date_selected</string>
+    <string name="emailto">To:</string>
+    <string name="email_subject">Subject:</string>
+    <string name="email_message">Message:</string>
+    <string name="send_button">Send</string>
+    <string name="text_message" translatable="false">text message</string>
+    <string name="app_name_EmailNASA">Email NASA</string>
+    <string name="email_default_text" translatable="false">nssc-contactcenter@nasa.gov</string>
+    <string name="title_activity_list_view">ListView</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
-    <string name="title_activity_main2">NASA Image of the Day</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="nasa_symbol">NASA symbol</string>
-    <string name="nasa_s_image_of_the_day">Nasa\'s Image Of The Day</string>
-    <string name="pick_date">Pick Date</string>
-    <string name="today">Today</string>
-    <string name="floating_action_button">float action button</string>
-    <string name="textview">TextView</string>
-    <string name="textview2">TextView</string>
-    <string name="textview3">TextView</string>
-    <string name="image_of_the_day">image of the day</string>
-    <string name="another_picture">another picture</string>
-    <string name="date_selected">date_selected</string>
-    <string name="emailto">To:</string>
-    <string name="email_subject">Subject:</string>
-    <string name="email_message">Message:</string>
-    <string name="send_button">Send</string>
-    <string name="text_message">text message</string>
-    <string name="app_name_EmailNASA">Email NASA</string>
-    <string name="email_default_text">nssc-contactcenter@nasa.gov</string>
 </resources>
