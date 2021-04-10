@@ -13,7 +13,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class DatePickerFragment extends DialogFragment {
-
+    /**
+     * onCreateDialog creates a DatePicker fragment that will
+     * return the date selected by the user. It limits the choices
+     * of dates to today or in the past.
+     * @param savedInstanceState
+     * @return
+     */
     @RequiresApi(api = Build.VERSION_CODES.N)
     @NonNull
     @Override

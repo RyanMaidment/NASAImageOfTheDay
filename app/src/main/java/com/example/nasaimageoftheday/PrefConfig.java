@@ -10,6 +10,11 @@ public class PrefConfig {
     private static final String MY_SHARED_PREFS = "com.example.nasaimageoftheday";
     private static final String PREF_DATE = "pref_date";
 
+    /**
+     *
+     * @param context
+     * @param date
+     */
     public static void saveDateInPref(Context context, String date){
         SharedPreferences pref = context.getSharedPreferences(MY_SHARED_PREFS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
@@ -17,6 +22,12 @@ public class PrefConfig {
         editor.apply();
 
     }
+
+    /**
+     *
+     * @param context
+     * @return
+     */
     public static String loadDateInPref(Context context){
         SharedPreferences pref = context.getSharedPreferences(MY_SHARED_PREFS, Context.MODE_PRIVATE);
         return pref.getString(PREF_DATE, "");

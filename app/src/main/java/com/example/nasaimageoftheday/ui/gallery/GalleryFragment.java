@@ -13,7 +13,13 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.nasaimageoftheday.R;
 
 public class GalleryFragment extends Fragment {
-
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         GalleryViewModel galleryViewModel = new ViewModelProvider(this).get(GalleryViewModel.class);

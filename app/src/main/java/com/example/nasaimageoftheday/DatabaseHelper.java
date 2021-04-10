@@ -24,7 +24,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_DATE = "image_date";
     private static final String KEY_EXPLANATION = "image_explanation";
 
-
     // Table create statement
     private static final String CREATE_TABLE_IMAGE = "CREATE TABLE " + DB_TABLE + " ( " +KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             KEY_NAME + " TEXT," +
@@ -32,11 +31,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             KEY_DATE + " TEXT," +
             KEY_EXPLANATION + " TEXT)";
 
+    /**
+     *
+     * @param context
+     */
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-
+    /**
+     * onCreate executes an SQL statement
+     * to create a table
+     * @param db
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -44,6 +51,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_IMAGE);
     }
 
+    /**
+     * onUpgrade will drop database table and create
+     * a new one if the database has been upgraded.
+     * @param db
+     * @param oldVersion
+     * @param newVersion
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // on upgrade drop older tables

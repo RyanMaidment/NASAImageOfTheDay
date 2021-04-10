@@ -39,6 +39,13 @@ public class MainActivity2 extends AppCompatActivity implements DatePickerDialog
     private Button mButtonTask;
     private Snackbar mSnackbar;
 
+    /**
+     * This onCreate() is used to create:
+     * FAB that shows a Snackbar and takes user to EmailNASA.java
+     * Toolbar where there is a NavDrawer
+     * Button to pick the date using a DatePicker
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,13 +57,13 @@ public class MainActivity2 extends AppCompatActivity implements DatePickerDialog
         textView.get().setText(PrefConfig.loadDateInPref(this));
         findViewById(R.id.button_today)
                 .setOnClickListener(v -> startActivity(new Intent(MainActivity2.this, ImageOfTheDay.class)));
-// Get the application context
+        //Get the application context
         mContext = getApplicationContext();
         mActivity = MainActivity2.this;
 
         // Get the widget reference from XML layout
         mRelativeLayout = findViewById(R.id.rl);
- //       mButtonTask = (Button) findViewById(R.id.btn_task);
+        //mButtonTask = (Button) findViewById(R.id.btn_task);
 
         // Initialize an empty text Snackbar
         mSnackbar = Snackbar.make(mRelativeLayout,"",Snackbar.LENGTH_INDEFINITE);
@@ -98,6 +105,12 @@ public class MainActivity2 extends AppCompatActivity implements DatePickerDialog
 
 
     }
+
+    /**
+     * @param view
+     * @param message
+     * @param duration
+     */
     public void showSnackbar(View view, String message, int duration)
     {
         // Create snackbar
@@ -108,6 +121,12 @@ public class MainActivity2 extends AppCompatActivity implements DatePickerDialog
 
         snackbar.show();
     }
+
+    /**
+     * onCreateOptionsMenu adds items to the action bar if it is present.
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -115,6 +134,12 @@ public class MainActivity2 extends AppCompatActivity implements DatePickerDialog
         return true;
     }
 
+    /**
+     * onSupportNavigateUp is called whenever
+     * the user chooses to navigate within the application's
+     * activity hierarchy from the action bar.
+     * @return
+     */
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -122,7 +147,18 @@ public class MainActivity2 extends AppCompatActivity implements DatePickerDialog
                 || super.onSupportNavigateUp();
     }
 
+    /**
+     * onDateSet gets date picked by user,
+     * Stores date picked by user in a TextView,
+     * Formats the date from API,
+     * Sends date pucked by user to ImageOfTheDay
+     * @param view
+     * @param year
+     * @param month
+     * @param dayOfMonth
+     */
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        //Gets date picked by user
         Calendar c = Calendar.getInstance();
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
@@ -130,10 +166,12 @@ public class MainActivity2 extends AppCompatActivity implements DatePickerDialog
 
         String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
 
+        //Stores date picked by user in a TextView
         AtomicReference<TextView> textView = new AtomicReference<>(findViewById(R.id.textView_date));
         textView.get().setText(currentDateString);
         PrefConfig.saveDateInPref(getApplicationContext(), currentDateString);
 
+        //Logic to format the date given from API
         int monthOfYear1 = month + 1;
         String formattedMonth = "" + monthOfYear1;
         String formattedDayOfMonth = "" + dayOfMonth;
@@ -147,6 +185,7 @@ public class MainActivity2 extends AppCompatActivity implements DatePickerDialog
             formattedDayOfMonth = "0" + dayOfMonth;
         }
 
+        //Sends date pucked by user to ImageOfTheDay
         Intent intent = new Intent(MainActivity2.this, ImageOfTheDay2.class);
         intent.putExtra("Date", year+"-"+formattedMonth+"-"+formattedDayOfMonth);
         startActivity(intent);

@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -39,31 +40,53 @@ public class ImageOfTheDay2 extends AppCompatActivity {
     protected String url;
     protected Bitmap nasaImage;
     private static final String TAG ="" ;
+
+    /**
+     * onCreate will get the date from the DatePicker
+     * and append the API URL to be able to get an image
+     * at a certain date.
+     * It sends the URL to MyHTTPRequest to get the info from the API
+     * It creates an onClickListener to call getImage() to download the
+     * image and create a toast when image is successfully downloaded.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imageoftheday);
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //  setSupportActionBar(toolbar);
+
         Intent i = getIntent();
         String appendURL = i.getStringExtra("Date");
         String uri = "https://api.nasa.gov/planetary/apod?api_key=VATcMfMCvQtVHKgzXnC8pmkDHooE7qpd89Beqw0m&date=" + appendURL;
         MyHTTPRequest req = new MyHTTPRequest();
-        req.execute(uri); //Type 1
+        req.execute(uri);
         Button button1 = findViewById(R.id.button);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getImage(nasaImage, title, date, explanation);
+                Toast.makeText(getBaseContext(), "Image Downloaded", Toast.LENGTH_LONG).show();
             }
         });
     }
-
+    /**
+     * onCreateOptionsMenu adds items to the action bar if it is present.
+     * @param menu
+     * @return
+     */
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+    /**
+     * Handle action bar item clicks here. The action bar will
+     * automatically handle clicks on the Home/Up button, so long
+     * as you specify a parent activity in AndroidManifest.xml.
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -79,12 +102,27 @@ public class ImageOfTheDay2 extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * getImage converts Bitmap image to byte array,
+     * and stores values from doInBackground into a
+     * database.
+     *
+     * @param result
+     * @param title
+     * @param date
+     * @param explanation
+     */
     public void getImage(Bitmap result, String title, String date, String explanation) {
+        //Initializing DatabaseHelper object.
         DatabaseHelper databaseHelper = new DatabaseHelper(ImageOfTheDay2.this);
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
+
+        //Converts Bitmap image to byte array.
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         result.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
         byte[] bytes = byteArrayOutputStream.toByteArray();
+
+        //Storing values in database.
         ContentValues contentValues = new ContentValues();
         contentValues.put("image_name", title);
         contentValues.put("image_data", bytes);
@@ -93,11 +131,21 @@ public class ImageOfTheDay2 extends AppCompatActivity {
         db.insert("table_image", null,contentValues);
     }
 
+
     private class MyHTTPRequest extends AsyncTask<String, Integer, String> {
+
         TextView viewTitle = (TextView) findViewById(R.id.viewTitle);
         TextView viewDate = (TextView) findViewById(R.id.viewDate);
         TextView viewDesc = (TextView) findViewById(R.id.viewDesc);
         //Type3                Type1
+
+        /**
+         * doInBackground reads the JSON from the API and creates an
+         * JSON object from the information.
+         * It returns the data from the API.
+         * @param args
+         * @return
+         */
         public String doInBackground(String... args) {
             try {
 
@@ -122,6 +170,7 @@ public class ImageOfTheDay2 extends AppCompatActivity {
                 }
                 String result = sb.toString(); //result is the whole string
 
+
                 // convert string to JSON:
                 JSONObject nasaJson = new JSONObject(result);
                 //get the double associated with "value"
@@ -140,12 +189,21 @@ public class ImageOfTheDay2 extends AppCompatActivity {
             return date + explanation + title + url;
         }
 
+        /**
+         * onProgressUpdate updates the progress bar when called.
+         * @param progress
+         */
         protected void onProgressUpdate(Integer... progress) {
             ProgressBar progressBar = findViewById(R.id.progressBar2);
             progressBar.setProgress(progress[0]);
         }
 
-        //Type3
+        /**
+         * onPostExecute takes the values from API and
+         * puts them into a TextView.
+         * It also calls DownloadImageTask to download the image from API
+         * @param fromDoInBackground
+         */
         public void onPostExecute(String fromDoInBackground) {
             Log.i("HTTP", fromDoInBackground);
             viewTitle.setText(title);
@@ -153,7 +211,8 @@ public class ImageOfTheDay2 extends AppCompatActivity {
             viewDesc.setText(explanation);
             viewDesc.setMovementMethod(new ScrollingMovementMethod());
 
-            new DownloadImageTask((ImageView) findViewById(R.id.imageView2))
+            //Calls DownloadImageTask to download image from API
+            new ImageOfTheDay2.DownloadImageTask((ImageView) findViewById(R.id.imageView2))
                     .execute(url);
         }
 
@@ -165,19 +224,33 @@ public class ImageOfTheDay2 extends AppCompatActivity {
             this.bmImage = bmImage;
         }
 
+        /**
+         * doInBackground gets appended URL and creates a Bitmap image
+         * from API image URL.
+         * @param urls
+         * @return
+         */
         protected Bitmap doInBackground(String... urls) {
+            //Get url
             String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
+            Bitmap bmImg = null;
+            //Get image from URL
             try {
                 InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
+                bmImg = BitmapFactory.decodeStream(in);
             } catch (Exception e) {
                 Log.e("Error", e.getMessage());
                 e.printStackTrace();
             }
-            return mIcon11;
+            //Return image
+            return bmImg;
+
         }
 
+        /**
+         * onPostExecute sets image from api to an ImageView
+         * @param result
+         */
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
             nasaImage = result;

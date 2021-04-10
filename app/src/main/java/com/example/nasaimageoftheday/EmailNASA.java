@@ -15,8 +15,13 @@ public class EmailNASA extends AppCompatActivity {
     private EditText mEditTextSubject;
     private EditText mEditTextMessage;
 
-
-protected void onCreate(Bundle savedInstanceState){
+    /**
+     * onCreate will initialize EditText fields and
+     * create a button with an onCLickListener that will
+     * call sendEmail()
+     * @param savedInstanceState
+     */
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.email_intent);
 
@@ -27,6 +32,11 @@ protected void onCreate(Bundle savedInstanceState){
         buttonSend.setOnClickListener(v -> sendEmail());
         }
 
+    /**
+     * sendEmail() gets text from EditText fields and creates
+     * an Intent to send the Strings to an email app to send the
+     * email.
+     */
     private void sendEmail() {
         String recipients = mEditTextTo.getText().toString();
         String subject = mEditTextSubject.getText().toString();
