@@ -38,9 +38,6 @@ public class ImageOfTheDay extends AppCompatActivity {
     protected String title;
     protected String url;
     protected Bitmap nasaImage;
-    TextView viewTitle = (TextView) findViewById(R.id.viewTitle);
-    TextView viewDate = (TextView) findViewById(R.id.viewDate);
-    TextView viewDesc = (TextView) findViewById(R.id.viewDesc);
     private static final String TAG ="" ;
     private static String nasaApi = "https://api.nasa.gov/planetary/apod?api_key=VATcMfMCvQtVHKgzXnC8pmkDHooE7qpd89Beqw0m";
 
@@ -199,6 +196,9 @@ public class ImageOfTheDay extends AppCompatActivity {
          * @param fromDoInBackground
          */
         public void onPostExecute(String fromDoInBackground) {
+            TextView viewTitle = (TextView) findViewById(R.id.viewTitle);
+            TextView viewDate = (TextView) findViewById(R.id.viewDate);
+            TextView viewDesc = (TextView) findViewById(R.id.viewDesc);
             Log.i("HTTP", fromDoInBackground);
             viewTitle.setText(title);
             viewDate.setText(date);
