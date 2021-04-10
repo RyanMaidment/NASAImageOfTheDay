@@ -30,9 +30,7 @@ public class NASAObj {
             return date;
         }
 
-        public String getExplanation() {
-            return explanation;
-        }
+        public String getExplanation(){return explanation;}
 
         public String getTitle() {
             return title;

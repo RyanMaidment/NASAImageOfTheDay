@@ -203,7 +203,7 @@ public class MainActivity2 extends AppCompatActivity implements DatePickerDialog
 // TODO 4.    The software must have at least 4 or more activities. Your activity must be accessible by selecting a graphical icon from a --Toolbar!, and --NavigationDrawer!.
 //               The top navigation layout should have the Activity’s title, and a version number.
 // TODO 5.    The project must use a fragment! somewhere in its graphical interface.
-// TODO 6.    Each activity must have a help menu item that displays an AlertDialog with instructions for how to use the interface.
+//TODO 6.    Each activity must have a help menu item that displays an AlertDialog with instructions for how to use the interface.
 // TODO 7.    There must be at least 1 other language supported by your Activity. Please use Canadian French as the secondary language if you do not you know a language other than English.
 // TODO 8.    The items listed in the ListView must be stored by the application so that they appear the next time the application is launched. The user must be able to add and delete items, which would then also be stored in a database.
 // TODO 9.    When retrieving data from an --http server!, the activity must use an --AsyncTask!.

@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     // Database Version
@@ -17,9 +15,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "imgoftheday";
 
     // Table Names
-    private static final String DB_TABLE = "table_image";
+    public static final String DB_TABLE = "table_image";
     // column names
-    private static final String KEY_ID = "_id";
+    public static final String KEY_ID = "_id";
     private static final String KEY_NAME = "image_name";
     private static final String KEY_IMAGE = "image_data";
     private static final String KEY_DATE = "image_date";
@@ -74,6 +72,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
 
         return cursor;
+    }
+
+    public void deleteRow(int rowId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query ="DELETE FROM "+DB_TABLE+" WHERE "+KEY_ID+"="+rowId;
+        db.execSQL(query);
+
     }
 
 
