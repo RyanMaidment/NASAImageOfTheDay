@@ -42,12 +42,20 @@
     <string name="text_message" translatable="false">text message</string>
     <string name="app_name_EmailNASA">Email NASA</string>
     <string name="email_default_text" translatable="false">nssc-contactcenter@nasa.gov</string>
-    <string name="title_activity_list_view">ListView</string>
+    <string name="title_activity_list_view">Gallery</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
     -->
-    <string name="hello_world">Hello Square World!</string>
+    <string name="help_main">The three dots in the top right corner will bring you to the gallery for the images you saved.\n
+                                The Today button will show you the image of the day.\n
+                                Pick Date button will allow you to choose an image from a previous day.\n
+                                The Email button will allow you to send an email to NASA.</string>
+    <string name="help_listView">Tapping on an item will open it in a new page. \n
+                                Holding the item will prompt you to delete the item.</string>
+    <string name="help_imgoftheday">The Download button will download the image to your device.</string>
+    <string name="help_title">Help</string>
+    <string name="help_button">Understood</string>
     <string name="PostiveYesButton">Yes</string>
     <string name="NegativeNoButton">No</string>
     <string name="dialogMessage">Do you want to delete photo?</string>

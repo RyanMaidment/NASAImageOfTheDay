@@ -15,9 +15,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "imgoftheday";
 
     // Table Names
-    public static final String DB_TABLE = "table_image";
+    private static final String DB_TABLE = "table_image";
     // column names
-    public static final String KEY_ID = "_id";
+    private static final String KEY_ID = "_id";
     private static final String KEY_NAME = "image_name";
     private static final String KEY_IMAGE = "image_data";
     private static final String KEY_DATE = "image_date";
@@ -66,6 +66,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    /**
+     * viewPhoto returns a cursor that will loop through
+     * rows in the database.
+     * @return
+     */
     public Cursor viewPhoto() {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "Select * from " + DB_TABLE;
@@ -74,6 +79,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    /**
+     * deleteRow deletes the row at the rowId
+     * it takes in from the parameter.s
+     * @param rowId
+     */
     public void deleteRow(int rowId) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query ="DELETE FROM "+DB_TABLE+" WHERE "+KEY_ID+"="+rowId;

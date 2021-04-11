@@ -84,9 +84,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button4"
         app:layout_constraintVertical_bias="0.0" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/teal_200"
+        android:contentDescription="@string/floating_action_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_baseline_help_24" />
     <RelativeLayout
         android:id="@+id/rl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-          />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-1dp">
+
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

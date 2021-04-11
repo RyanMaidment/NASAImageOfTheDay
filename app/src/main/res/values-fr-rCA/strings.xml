@@ -14,4 +14,14 @@
     <string name="send_button">"Envoyer: "</string>
     <string name="app_name_EmailNASA">Email NASA</string>
     <string name="action_settings">Galerie</string>
+    <string name="title_activity_list_view">Galerie</string>
+    <string name="PostiveYesButton">Out</string>
+    <string name="NegativeNoButton">Non</string>
+    <string name="dialogMessage">Voulez-vous supprimer la photo?</string>
+    <string name="dialogTitle">Supprimer la photo</string>
+    <string name="help_main">Les trois points dans le coin supérieur droit vous amèneront à la galerie des images que vous avez enregistrées. \\nLe bouton Aujourd\'hui vous montrera l\'image du jour.\\n Le bouton Choisir la date vous permettra de choisir une image d\'un jour précédent.                                  Le bouton E-mail vous permettra d\'envoyer un e-mail à la NASA.</string>
+    <string name="help_listView">Appuyez sur un élément pour l\'ouvrir dans une nouvelle page. \\ n Tenir l\'élément vous invitera à supprimer l\'élément.</string>
+    <string name="help_imgoftheday">Le bouton Télécharger téléchargera l\'image sur votre appareil.</string>
+    <string name="help_title">Aider</string>
+    <string name="help_button">Comprendre</string>
 </resources>

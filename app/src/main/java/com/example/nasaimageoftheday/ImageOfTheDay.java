@@ -1,6 +1,7 @@
 package com.example.nasaimageoftheday;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -21,6 +23,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONObject;
 
@@ -53,6 +57,25 @@ public class ImageOfTheDay extends AppCompatActivity {
         setContentView(R.layout.activity_imageoftheday);
         MyHTTPRequest req = new MyHTTPRequest();
         req.execute(nasaApi);
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(ImageOfTheDay.this)
+                        .setTitle(R.string.help_title)
+                        .setMessage(R.string.help_imgoftheday)
+
+                        // Specifying a listener allows you to take an action before dismissing the dialog.
+                        // The dialog is automatically dismissed when a dialog button is clicked.
+                        .setPositiveButton(R.string.help_button, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        });
         Button button1 = findViewById(R.id.button);
         //onClickListener to create a toast when the image has been downloaded.
         button1.setOnClickListener(new View.OnClickListener() {
