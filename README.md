@@ -3,9 +3,9 @@ NASA Image of the Day
 
 This is an Android application that utilizes NASAs Image of the Day API and NoSQL to display present and past images of the day, and allows users to save the images to their device and learn about the image posted.
 
-[App Demo](https://www.youtube.com/watch?v=F9_eUSd3F-0&ab_channel=RyanMaidment)
+[Video App Demo](https://www.youtube.com/watch?v=F9_eUSd3F-0&ab_channel=RyanMaidment)
 
-![App Preview](https://imgur.com/a/c2WvAYk)
+![App Preview](https://i.imgur.com/KhGG4Na.png)
 
 ---
 
