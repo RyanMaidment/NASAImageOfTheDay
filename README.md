@@ -16,9 +16,9 @@ This is an Android application that utilizes NASAs Image of the Day API and NoSQ
 ---
 
 ## Installation
-Download Android APK from link below.
-Allow Apps from Unknown Sources on Android. (Found in Settings under the Secuity tab)
-Ensure you have a proper internet connection when the app is in use.
+- Download Android APK from link below.
+- Allow Apps from Unknown Sources on Android. (Found in Settings under the Secuity tab)
+- Ensure you have a proper internet connection when the app is in use.
 
 ---
 
